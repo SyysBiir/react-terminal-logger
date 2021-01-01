@@ -29,19 +29,27 @@ async function fetch_ (in_, val, stack) {
 	})
 }
 module.exports = {
-	start: () => {
-			console.disableYellowBox = true;
+	start: (opt = ["log", "error", "info", "warn"]) => {
+		console.disableYellowBox = true;
+		if(opt.indexOf("log") !== -1) {
 			window.console.log = (val) => {
 				fetch_("log", val, new Error().stack.split('\n')[1].split('@')[0]);
 			}
+		}
+		if(opt.indexOf("error") !== -1) {
 			window.console.error = (val) => {
 				fetch_("error", val, new Error().stack.split('\n')[1].split('@')[0]);
 			}
+		}
+		if(opt.indexOf("info") !== -1) {
 			window.console.info = (val) => {
 				fetch_("info", val, new Error().stack.split('\n')[1].split('@')[0]);
 			}
+		}
+		if(opt.indexOf("warn") !== -1) {
 			window.console.warn = (val) => {
 				fetch_("warn", val, new Error().stack.split('\n')[1].split('@')[0]);
 			}
 		}
+	}
 }
