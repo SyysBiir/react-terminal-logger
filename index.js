@@ -9,6 +9,13 @@ function _array_info(length) {
 } 
 const port = 1234;
 app.use(bodyParser.json());
+app.use(function (req, res, next) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    next();
+});
 app.listen(port, () => {
 	_name = "INFO: ".grey;
 	console.log(_name + ('Server is listening on '+port).green)

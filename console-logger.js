@@ -14,7 +14,7 @@ async function fetch_ (in_, val, stack) {
 				stack: stack
 			}
 		}
-		fetch('http://127.0.0.1:1234/console/'+in_, {
+		fetch('http://localhost:1234/console/'+in_, {
 	  		method: "POST",
 		    headers: {
 		        "Content-type": "application/json"
@@ -30,7 +30,6 @@ async function fetch_ (in_, val, stack) {
 }
 module.exports = {
 	start: () => {
-		if(__DEV__) {
 			console.disableYellowBox = true;
 			window.console.log = (val) => {
 				fetch_("log", val, new Error().stack.split('\n')[1].split('@')[0]);
@@ -45,5 +44,4 @@ module.exports = {
 				fetch_("warn", val, new Error().stack.split('\n')[1].split('@')[0]);
 			}
 		}
-	}
 }
