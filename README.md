@@ -1,4 +1,5 @@
 # React terminal logger
+[![npm](https://img.shields.io/npm/v/github-buttons)](https://www.npmjs.com/package/react-terminal-logger)
 > Simple console logger for react and react-native
 
 ## Getting Started
