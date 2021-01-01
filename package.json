@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/SyysBiir/react-console.git"
+    "url": "git+https://github.com/SyysBiir/react-terminal-logger.git"
   },
   "author": "syysbiir",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/SyysBiir/react-console/issues"
+    "url": "https://github.com/SyysBiir/react-terminal-logger/issues"
   },
-  "homepage": "https://github.com/SyysBiir/react-console#readme",
+  "homepage": "https://github.com/SyysBiir/react-terminal-logger#readme",
   "dependencies": {
     "body-parser": "^1.19.0",
     "colors": "^1.4.0",
