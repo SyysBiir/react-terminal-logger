@@ -1,5 +1,5 @@
 # React terminal logger
-> Simple console logger for react and react-native"
+> Simple console logger for react and react-native
 
 ## Getting Started
 To install the module, run the following in the command line:
