@@ -32,3 +32,8 @@ In addition to the standard console.log, console.info, console.error, console.wa
 logr("your log");
 ```
 You can use this command anywhere, it is enough to include our module in the index file.
+Logging to logger.debug.log file:
+```js
+ReactLogger.start(["log", "error", "info", "warn", "logr"], true);
+```
+The file will be created in your project directory

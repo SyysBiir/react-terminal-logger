@@ -1,15 +1,17 @@
-async function fetch_ (in_, val, stack) {
+async function fetch_ (in_, val, stack, save_logs) {
 	return new Promise(resolve => {
 		var data;
 		if(typeof val == 'object') {
 			data = {
 				string: "0",
+				save_logs: save_logs ? "1" : "0",
 				data: val,
 				stack: stack
 			}
 		} else {
 			data = {
 				string: '1',
+				save_logs: save_logs ? "1" : "0",
 				data: val.toString(),
 				stack: stack
 			}
@@ -29,32 +31,32 @@ async function fetch_ (in_, val, stack) {
 	})
 }
 module.exports = {
-	start: (opt = ["log", "error", "info", "warn", "logr"]) => {
+	start: (opt = ["log", "error", "info", "warn", "logr"], save_logs = false) => {
 		if(process.env.NODE_ENV === 'development') {
 			console.disableYellowBox = true;
 			if(opt.indexOf("log") !== -1) {
 				window.console.log = (val) => {
-					fetch_("log", val, new Error().stack.split('\n')[1].split('@')[0]);
+					fetch_("log", val, new Error().stack.split('\n')[1].split('@')[0], save_logs);
 				}
 			}
 			if(opt.indexOf("error") !== -1) {
 				window.console.error = (val) => {
-					fetch_("error", val, new Error().stack.split('\n')[1].split('@')[0]);
+					fetch_("error", val, new Error().stack.split('\n')[1].split('@')[0], save_logs);
 				}
 			}
 			if(opt.indexOf("info") !== -1) {
 				window.console.info = (val) => {
-					fetch_("info", val, new Error().stack.split('\n')[1].split('@')[0]);
+					fetch_("info", val, new Error().stack.split('\n')[1].split('@')[0], save_logs);
 				}
 			}
 			if(opt.indexOf("warn") !== -1) {
 				window.console.warn = (val) => {
-					fetch_("warn", val, new Error().stack.split('\n')[1].split('@')[0]);
+					fetch_("warn", val, new Error().stack.split('\n')[1].split('@')[0], save_logs);
 				}
 			}
 			if(opt.indexOf("logr") !== -1) {
 				window.logr = (val) => {
-					fetch_("logr", val, new Error().stack.split('\n')[1].split('@')[0]);
+					fetch_("logr", val, new Error().stack.split('\n')[1].split('@')[0], save_logs);
 				}
 			}
 		} else {
