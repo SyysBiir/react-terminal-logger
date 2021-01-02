@@ -95,7 +95,7 @@ app.post('/console/:id', (req, res) => {
 		let month = ("0" + (date_obj.getMonth() + 1)).slice(-2);
 		let year = date_obj.getFullYear();
 		let current_date = year + "-" + month + "-" + date + " ";
-		var logFile = fs.createWriteStream('./logger.log', { flags: 'a' });
+		var logFile = fs.createWriteStream('./logger.debug.log', { flags: 'a' });
 		if(body.string == '1') {
 			logFile.write(current_date + ((new Date()).toLocaleTimeString()) + log_name + stack + body.data + '\n')
 		} else {
