@@ -15,7 +15,7 @@ or
 ```js
 import ReactLogger from 'react-terminal-logger/console-logger'
 ```
-Run this code in index.js of your project:
+Run this command in your project's index file:
 ```js
 ReactLogger.start();
 ```
