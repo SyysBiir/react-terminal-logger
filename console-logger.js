@@ -29,7 +29,7 @@ async function fetch_ (in_, val, stack) {
 	})
 }
 module.exports = {
-	start: (opt = ["log", "error", "info", "warn"]) => {
+	start: (opt = ["log", "error", "info", "warn", "logr"]) => {
 		console.disableYellowBox = true;
 		if(opt.indexOf("log") !== -1) {
 			window.console.log = (val) => {
@@ -49,6 +49,11 @@ module.exports = {
 		if(opt.indexOf("warn") !== -1) {
 			window.console.warn = (val) => {
 				fetch_("warn", val, new Error().stack.split('\n')[1].split('@')[0]);
+			}
+		}
+		if(opt.indexOf("logr") !== -1) {
+			window.logr = (val) => {
+				fetch_("logr", val, new Error().stack.split('\n')[1].split('@')[0]);
 			}
 		}
 	}

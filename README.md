@@ -15,15 +15,20 @@ or
 ```js
 import ReactLogger from 'react-terminal-logger/console-logger'
 ```
-Example:
+Run this code in index.js of your project:
 ```js
 ReactLogger.start();
 ```
 You can specify what information to show in the terminal:
 ```js
-ReactLogger.start(["log", "error", "info", "warn"]);
+ReactLogger.start(["log", "error", "info", "warn", "logr"]);
 ```
-To start the logger, you need to run the command in your project directory:
+Now all your logs will be displayed in the terminal. To start the logger, you need to run the command in your project directory:
 ```bash
 npx react-terminal-logger
 ```
+In addition to the standard console.log, console.info, console.error, console.warn added a quick command for logging:
+```js
+logr("your log");
+```
+You can use this command anywhere, it is enough to include our module in the index file.

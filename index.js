@@ -67,6 +67,16 @@ app.post('/console/:id', (req, res) => {
 				console.log('\n\t')
 			}
 		break;
+		case "logr":
+			_name = "LOGR: ".green;
+			if(body.string == '1') {
+				console.log(_name + stack + (body.data).green + '\n\t')
+			} else {
+				console.log(_name + _array_info(body.data.length) + stack)
+				console.log(body.data)
+				console.log('\n\t')
+			}
+		break;
 		default:
 			console.log(body)
 		break;
