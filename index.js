@@ -20,7 +20,7 @@ app.use(function (req, res, next) {
 });
 app.listen(port, () => {
 	_name = ((new Date()).toLocaleTimeString()).grey + " INFO: ".grey;
-	console.log(_name + ('React Logger started').blue + '\n\t');
+	console.log(_name + ('React Logger started on '+port).blue + '\n\t');
 	if (!fs.existsSync(logs_dir)){
 		fs.mkdirSync(logs_dir);
 	}
