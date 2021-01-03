@@ -29,7 +29,7 @@ npx react-terminal-logger
 ```
 You can specify the port on which the logger will run:
 ```bash
-npx react-terminal-logger -p=1234
+npx react-terminal-logger --p=1234
 ```
 ## Configuration
 You can specify what information to show in the terminal:
