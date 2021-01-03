@@ -2,6 +2,10 @@
 [![npm](https://img.shields.io/npm/v/github-buttons)](https://www.npmjs.com/package/react-terminal-logger)
 > Simple console logger for react and react-native
 
+## New Features!
+ - Saving logs to a file (optional)
+ - Short alias for console.log
+ 
 ## Getting Started
 To install the module, run the following in the command line:
 ```bash
@@ -32,7 +36,8 @@ In addition to the standard console.log, console.info, console.error, console.wa
 logr("your log");
 ```
 You can use this command anywhere, it is enough to include our module in the index file.
-Logging to logger.debug.log file:
+
+To save your logs to the file logger.debug.log, you need to send the second parameter to the ReactLogger.start function:
 ```js
 ReactLogger.start(["log", "error", "info", "warn", "logr"], true);
 ```
