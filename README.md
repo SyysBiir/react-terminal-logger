@@ -23,6 +23,10 @@ Run this command in your project's index file:
 ```js
 ReactLogger.start(); //Quick start with standard configuration
 ```
+To run the logger in the terminal, you need to run the command in your project directory:
+```bash
+npx react-terminal-logger
+```
 ## Configuration
 You can specify what information to show in the terminal:
 ```js
@@ -40,10 +44,6 @@ ReactLogger.config({
     only_msg : true //Show only message in terminal. Default: false
 });
 ReactLogger.start();
-```
-To run the logger in the terminal, you need to run the command in your project directory:
-```bash
-npx react-terminal-logger
 ```
 In addition to the standard **console.log**, **console.info**, **console.error**, **console.warn** added a quick command for logging:
 ```js
