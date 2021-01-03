@@ -29,6 +29,8 @@
     "react-native",
     "terminal logger",
     "console",
-    "terminal"
+    "terminal",
+    "log file",
+    "logfile"
   ]
 }
