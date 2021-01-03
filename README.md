@@ -13,7 +13,7 @@ npm i react-terminal-logger --save
 ```
 Use within your application with the following line of JavaScript:
 ```js
-const ReactLogger = require('react-terminal-logger/console-logge');
+const ReactLogger = require('react-terminal-logger/console-logger');
 ```
 or
 ```js
