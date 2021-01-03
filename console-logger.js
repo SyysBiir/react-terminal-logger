@@ -1,9 +1,11 @@
+var only_msg = false, save_logs = false, visible = [];
 async function fetch_ (in_, val, stack, save_logs) {
 	return new Promise(resolve => {
 		var data;
 		if(val.length === 1) {
 			if(typeof val[0] == 'object') {
 				data = {
+					only_msg: only_msg ? "1" : "0",
 					string: "0",
 					save_logs: save_logs ? "1" : "0",
 					data: val[0],
@@ -11,6 +13,7 @@ async function fetch_ (in_, val, stack, save_logs) {
 				}
 			} else {
 				data = {
+					only_msg: only_msg ? "1" : "0",
 					string: '1',
 					save_logs: save_logs ? "1" : "0",
 					data: val[0].toString(),
@@ -27,6 +30,7 @@ async function fetch_ (in_, val, stack, save_logs) {
 				}
 			})
 			data = {
+				only_msg: only_msg ? "1" : "0",
 				string: '1',
 				save_logs: save_logs ? "1" : "0",
 				data: allVal,
@@ -48,7 +52,28 @@ async function fetch_ (in_, val, stack, save_logs) {
 	})
 }
 module.exports = {
-	start: (opt = ["log", "error", "info", "warn", "logr"], save_logs = false) => {
+	config: (opt) => {
+		if(opt.visible) {
+			visible = opt.visible;
+		}
+		if(opt.only_msg) {
+			only_msg = opt.only_msg;
+		}
+		if(opt.save_logs) {
+			save_logs = opt.save_logs;
+		}
+	},
+	start: (opt_ = ["log", "error", "info", "warn", "logr"], save_logs_ = false, only_msg_ = false) => {
+		let opt = opt_;
+		if(save_logs_) {
+			save_logs = true;
+		}
+		if(only_msg_) {
+			only_msg = true;
+		}
+		if(visible.length > 0) {
+			opt = visible;
+		}
 		if(process.env.NODE_ENV === 'development') {
 			console.disableYellowBox = true;
 			if(opt.indexOf("log") !== -1) {

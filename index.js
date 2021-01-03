@@ -33,7 +33,7 @@ app.post('/console/:id', (req, res) => {
 	body =  req.body,
 	save_logs = (body.save_logs == "1") ? true : false,
 	date_obj = new Date(),
-	stack = ((body.stack) + " ").grey, 
+	stack = (body.only_msg == "1") ? "" : ((body.stack) + " ").grey, 
 	log_name = " LOG: ";
 
 	let current_time = (date_obj.toLocaleTimeString()).grey;
@@ -41,7 +41,7 @@ app.post('/console/:id', (req, res) => {
 	switch(id) {
 		case "log":
 			log_name = " LOG: ";
-			_name = current_time + log_name.grey;
+			_name = (body.only_msg == "1") ? "" : (current_time + log_name.grey);
 			if(body.string == '1') {
 				console.log(_name + stack + body.data + '\n\t')
 			} else {
@@ -52,7 +52,7 @@ app.post('/console/:id', (req, res) => {
 		break;
 		case "error":
 			log_name = " ERR: ";
-			_name = current_time + log_name.grey;
+			_name = (body.only_msg == "1") ? "" : (current_time + log_name.grey);
 			if(body.string == '1') {
 				console.log(_name + stack + (body.data).red + '\n\t')
 			} else {
@@ -63,7 +63,7 @@ app.post('/console/:id', (req, res) => {
 		break;
 		case "info":
 			log_name = " INFO: ";
-			_name = current_time + log_name.grey;
+			_name = (body.only_msg == "1") ? "" : (current_time + log_name.grey);
 			if(body.string == '1') {
 				console.info(_name + stack + (body.data).blue + '\n\t')
 			} else {
@@ -74,7 +74,7 @@ app.post('/console/:id', (req, res) => {
 		break;
 		case "warn":
 			log_name = " WARN: ";
-			_name = current_time + log_name.grey;
+			_name = (body.only_msg == "1") ? "" : (current_time + log_name.grey);
 			if(body.string == '1') {
 				console.warn(_name + stack + (body.data).yellow + '\n\t')
 			} else {
@@ -85,7 +85,7 @@ app.post('/console/:id', (req, res) => {
 		break;
 		case "logr":
 			log_name = " LOGR: ";
-			_name = current_time + log_name.green;
+			_name = (body.only_msg == "1") ? "" : (current_time + log_name.green);
 			if(body.string == '1') {
 				console.log(_name + stack + (body.data).green + '\n\t')
 			} else {
@@ -101,7 +101,8 @@ app.post('/console/:id', (req, res) => {
 	if(save_logs) {
 		let date = ("0" + date_obj.getDate()).slice(-2),
 		month = ("0" + (date_obj.getMonth() + 1)).slice(-2),
-		year = date_obj.getFullYear();
+		year = date_obj.getFullYear(),
+		stack = ((body.stack) + " ").grey;
 		let current_date = year + "-" + month + "-" + date + " ";
 		var logFile = fs.createWriteStream(logs_dir + '/logger.all.log', { flags: 'a' }),
 		logFileLogs = fs.createWriteStream(logs_dir + '/logger.log.log', { flags: 'a' }),

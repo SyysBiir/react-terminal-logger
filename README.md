@@ -21,13 +21,27 @@ import ReactLogger from 'react-terminal-logger/console-logger'
 ```
 Run this command in your project's index file:
 ```js
-ReactLogger.start();
+ReactLogger.start(); //Quick start with standard configuration
 ```
+## Configuration
 You can specify what information to show in the terminal:
 ```js
-ReactLogger.start(["log", "error", "info", "warn", "logr"]);
+ReactLogger.start(
+    ["log", "error", "info", "warn", "logr"], //You can specify what information to show in the terminal
+    true, //Save logs to a file. Your logs will be saved in directory react-logger-logs Default: false
+    true //Show only message in terminal. Default: false
+);
 ```
-Now all your logs will be displayed in the terminal. To start the logger, you need to run the command in your project directory:
+or 
+```js
+ReactLogger.config({
+    visible : ["log", "error", "info", "warn", "logr"], //You can specify what information to show in the terminal
+    save_logs: true, //Save logs to a file. Your logs will be saved in directory react-logger-logs Default: false
+    only_msg : true //Show only message in terminal. Default: false
+});
+ReactLogger.start();
+```
+To start the logger, you need to run the command in your project directory:
 ```bash
 npx react-terminal-logger
 ```
@@ -37,9 +51,3 @@ logr("your log");
 logr("your log", 1, [{"a1": 1}]);
 ```
 You can use this command anywhere, it is enough to include our module in the index file.
-
-To save your logs to a file, you need to send the second parameter to the **ReactLogger.start** function:
-```js
-ReactLogger.start(["log", "error", "info", "warn", "logr"], true);
-```
-Your logs will be saved in directory **react-logger-logs**
