@@ -1,4 +1,4 @@
-var only_msg = false, save_logs = false, visible = [];
+var only_msg = false, save_logs = false, visible = [], port = 1234;
 async function fetch_ (in_, val, stack, save_logs) {
 	return new Promise(resolve => {
 		var data;
@@ -37,7 +37,7 @@ async function fetch_ (in_, val, stack, save_logs) {
 				stack: stack
 			}
 		}
-		fetch('http://localhost:1234/console/'+in_, {
+		fetch('http://localhost:'+port+'/console/'+in_, {
 	  		method: "POST",
 		    headers: {
 		        "Content-type": "application/json"
@@ -62,14 +62,20 @@ module.exports = {
 		if(opt.save_logs) {
 			save_logs = opt.save_logs;
 		}
+		if(opt.port) {
+			port = opt.port;
+		}
 	},
-	start: (opt_ = ["log", "error", "info", "warn", "logr"], save_logs_ = false, only_msg_ = false) => {
+	start: (opt_ = ["log", "error", "info", "warn", "logr"], save_logs_ = false, only_msg_ = false, port_ = 1234) => {
 		let opt = opt_;
 		if(save_logs_) {
 			save_logs = true;
 		}
 		if(only_msg_) {
 			only_msg = true;
+		}
+		if(port_ != 1234) {
+			port = port_;
 		}
 		if(visible.length > 0) {
 			opt = visible;

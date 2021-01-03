@@ -9,7 +9,17 @@ var logs_dir 		 = './react-logger-logs';
 function _array_info(length) {
 	return ("Array(" + length + ") ").grey;
 } 
-const port = 1234;
+var port = 1234;
+process.argv.forEach(function (val, index, array) {
+	if(index === 2) {
+		if(val.indexOf("--p=") === -1) {
+			console.log("Invalid command line argument: " + val)
+			process.exit()
+		}
+		port = val.replace("--p=","")
+		port = +port
+	}
+})
 app.use(bodyParser.json());
 app.use(function (req, res, next) {
     res.setHeader('Access-Control-Allow-Origin', '*');

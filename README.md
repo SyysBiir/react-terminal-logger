@@ -27,21 +27,27 @@ To run the logger in the terminal, you need to run the command in your project d
 ```bash
 npx react-terminal-logger
 ```
+You can specify the port on which the logger will run:
+```bash
+npx react-terminal-logger -p=1234
+```
 ## Configuration
 You can specify what information to show in the terminal:
 ```js
 ReactLogger.start(
     ["log", "error", "info", "warn", "logr"], //You can specify what information to show in the terminal
-    true, //Save logs to a file. Your logs will be saved in directory react-logger-logs Default: false
-    true //Show only message in terminal. Default: false
+    true, //Save logs to a file. Your logs will be saved in directory react-logger-logs. Default: false
+    true, //Show only message in terminal. Default: false
+    1234 //Port on which the logger is running. Default: 1234
 );
 ```
 or 
 ```js
 ReactLogger.config({
     visible : ["log", "error", "info", "warn", "logr"], //You can specify what information to show in the terminal
-    save_logs: true, //Save logs to a file. Your logs will be saved in directory react-logger-logs Default: false
-    only_msg : true //Show only message in terminal. Default: false
+    save_logs: true, //Save logs to a file. Your logs will be saved in directory react-logger-logs. Default: false
+    only_msg : true, //Show only message in terminal. Default: false
+    port: 1234 //Port on which the logger is running. Default: 1234
 });
 ReactLogger.start();
 ```
