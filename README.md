@@ -41,7 +41,7 @@ ReactLogger.config({
 });
 ReactLogger.start();
 ```
-To start the logger, you need to run the command in your project directory:
+To run the logger in the terminal, you need to run the command in your project directory:
 ```bash
 npx react-terminal-logger
 ```
