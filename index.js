@@ -4,7 +4,8 @@ const express        = require('express');
 const bodyParser     = require('body-parser');
 const app            = express();
 const fs			 = require('fs');
-var colors 			 = require('colors'), name, stack;
+var colors 			 = require('colors');
+var logs_dir 		 = './react-logger-logs';
 function _array_info(length) {
 	return ("Array(" + length + ") ").grey;
 } 
@@ -19,17 +20,22 @@ app.use(function (req, res, next) {
 });
 app.listen(port, () => {
 	_name = ((new Date()).toLocaleTimeString()).grey + " INFO: ".grey;
-	console.log(_name + ('React Logger started').blue + '\n\t')
+	console.log(_name + ('React Logger started').blue + '\n\t');
+	fs.mkdirSync(logs_dir);
 });
 app.get('/', (req,res) => {
 	res.send("Hello world");
 });
 app.post('/console/:id', (req, res) => {
-	let id = req.params.id, body =  req.body;
-	stack = ((body.stack) + " ").grey, log_name = " LOG: ";
-	let save_logs = (body.save_logs == "1") ? true : false;
-	let date_obj = new Date();
+	let id = req.params.id, 
+	body =  req.body,
+	save_logs = (body.save_logs == "1") ? true : false,
+	date_obj = new Date(),
+	stack = ((body.stack) + " ").grey, 
+	log_name = " LOG: ";
+
 	let current_time = (date_obj.toLocaleTimeString()).grey;
+	
 	switch(id) {
 		case "log":
 			log_name = " LOG: ";
@@ -91,11 +97,67 @@ app.post('/console/:id', (req, res) => {
 		break;
 	}
 	if(save_logs) {
-		let date = ("0" + date_obj.getDate()).slice(-2);
-		let month = ("0" + (date_obj.getMonth() + 1)).slice(-2);
-		let year = date_obj.getFullYear();
+		let date = ("0" + date_obj.getDate()).slice(-2),
+		month = ("0" + (date_obj.getMonth() + 1)).slice(-2),
+		year = date_obj.getFullYear();
 		let current_date = year + "-" + month + "-" + date + " ";
-		var logFile = fs.createWriteStream('./logger.debug.log', { flags: 'a' });
+		var logFile = fs.createWriteStream(logs_dir + '/logger.all.log', { flags: 'a' }),
+		logFileLogs = fs.createWriteStream(logs_dir + '/logger.log.log', { flags: 'a' }),
+		logFileErrs = fs.createWriteStream(logs_dir + '/logger.err.log', { flags: 'a' }),
+		logFileWarns = fs.createWriteStream(logs_dir + '/logger.warn.log', { flags: 'a' }),
+		logFileInfos = fs.createWriteStream(logs_dir + '/logger.info.log', { flags: 'a' }),
+		logFileLogrs = fs.createWriteStream(logs_dir + '/logger.logr.log', { flags: 'a' });
+		switch(id) {
+			case "log":
+				if(body.string == '1') {
+					logFileLogs.write(current_date + ((new Date()).toLocaleTimeString()) + log_name + stack + body.data + '\n')
+				} else {
+					logFileLogs.write(current_date + ((new Date()).toLocaleTimeString()) + log_name + _array_info(body.data.length) + stack)
+					logFileLogs.write(body.data)
+					logFileLogs.write('\n')
+				}
+			break;
+
+			case "error":
+				if(body.string == '1') {
+					logFileErrs.write(current_date + ((new Date()).toLocaleTimeString()) + log_name + stack + body.data + '\n')
+				} else {
+					logFileErrs.write(current_date + ((new Date()).toLocaleTimeString()) + log_name + _array_info(body.data.length) + stack)
+					logFileErrs.write(body.data)
+					logFileErrs.write('\n')
+				}
+			break;
+
+			case "info":
+				if(body.string == '1') {
+					logFileInfos.write(current_date + ((new Date()).toLocaleTimeString()) + log_name + stack + body.data + '\n')
+				} else {
+					logFileInfos.write(current_date + ((new Date()).toLocaleTimeString()) + log_name + _array_info(body.data.length) + stack)
+					logFileInfos.write(body.data)
+					logFileInfos.write('\n')
+				}
+			break;
+
+			case "warn":
+				if(body.string == '1') {
+					logFileWarns.write(current_date + ((new Date()).toLocaleTimeString()) + log_name + stack + body.data + '\n')
+				} else {
+					logFileWarns.write(current_date + ((new Date()).toLocaleTimeString()) + log_name + _array_info(body.data.length) + stack)
+					logFileWarns.write(body.data)
+					logFileWarns.write('\n')
+				}
+			break;
+
+			case "logr":
+				if(body.string == '1') {
+					logFileLogrs.write(current_date + ((new Date()).toLocaleTimeString()) + log_name + stack + body.data + '\n')
+				} else {
+					logFileLogrs.write(current_date + ((new Date()).toLocaleTimeString()) + log_name + _array_info(body.data.length) + stack)
+					logFileLogrs.write(body.data)
+					logFileLogrs.write('\n')
+				}
+			break;
+		}
 		if(body.string == '1') {
 			logFile.write(current_date + ((new Date()).toLocaleTimeString()) + log_name + stack + body.data + '\n')
 		} else {
