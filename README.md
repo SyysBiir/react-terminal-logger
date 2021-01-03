@@ -1,6 +1,6 @@
 # React terminal logger
 [![npm](https://img.shields.io/npm/v/github-buttons)](https://www.npmjs.com/package/react-terminal-logger)
-> Simple console logger for react and react-native
+> Simple console logger for vue, react and react-native
 
 ## New Features!
  - Saving logs to a file (optional)
