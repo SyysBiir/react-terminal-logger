@@ -1,6 +1,6 @@
 {
   "name": "react-terminal-logger",
-  "version": "1.3.4",
+  "version": "1.3.5",
   "description": "Simple console logger for vue, react and react-native",
   "bin": "./index.js",
   "scripts": {
