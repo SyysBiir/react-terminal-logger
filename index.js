@@ -5,11 +5,10 @@ const bodyParser     = require('body-parser');
 const app            = express();
 const fs			 = require('fs');
 var colors 			 = require('colors');
-var logs_dir 		 = './react-logger-logs';
+var logs_dir 		 = './react-logger-logs', port = 1234;
 function _array_info(length) {
 	return ("Array(" + length + ") ").grey;
 } 
-var port = 1234;
 process.argv.forEach(function (val, index, array) {
 	if(index === 2) {
 		if(val.indexOf("--p=") === -1) {
@@ -36,7 +35,7 @@ app.listen(port, () => {
 	}
 });
 app.get('/', (req,res) => {
-	res.send("Hello world");
+	res.send("To see your logs run the command in terminal <b>npx react-terminal-logger</b>");
 });
 app.post('/console/:id', (req, res) => {
 	let id = req.params.id, 
