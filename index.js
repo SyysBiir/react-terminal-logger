@@ -35,7 +35,7 @@ app.listen(port, () => {
 	}
 });
 app.get('/', (req,res) => {
-	res.send("To see your logs run the command in terminal <b>npx react-terminal-logger</b>");
+	res.send("Your logs are displayed in the terminal");
 });
 app.post('/console/:id', (req, res) => {
 	let id = req.params.id, 
