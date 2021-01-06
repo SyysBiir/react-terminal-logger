@@ -55,7 +55,7 @@ ReactLogger.start();
 ```
 In addition to the standard **console.log**, **console.info**, **console.error**, **console.warn** added a quick command for logging:
 ```js
-logr("your log");
-logr("your log", 1, [{"a1": 1}]);
+logr("your log"); //window.logr("your log")
+logr("your log", 1, [{"a1": 1}]); //window.logr("your log", 1, [{"a1": 1}])
 ```
 You can use this command anywhere, it is enough to include our module in the index file.
