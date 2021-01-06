@@ -72,7 +72,7 @@ module.exports = {
 			stacktrace_hide = opt.stacktrace_hide;
 		}
 	},
-	start: (opt_ = ["log", "error", "info", "warn", "logr"], save_logs_ = false, only_msg_ = false, port_ = 1234, stacktrace_hide = false) => {
+	start: (opt_ = ["log", "error", "info", "warn", "logr"], save_logs_ = false, only_msg_ = false, port_ = 1234, stacktrace_hide_ = false) => {
 		let opt = opt_;
 		if(save_logs_) {
 			save_logs = true;
@@ -83,7 +83,7 @@ module.exports = {
 		if(port_ != 1234) {
 			port = port_;
 		}
-		if(stacktrace_hide) {
+		if(stacktrace_hide_) {
 			stacktrace_hide = true;
 		}
 		if(visible.length > 0) {
