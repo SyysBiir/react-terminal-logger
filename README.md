@@ -37,8 +37,9 @@ You can specify what information to show in the terminal:
 ReactLogger.start(
     ["log", "error", "info", "warn", "logr"], //You can specify what information to show in the terminal
     true, //Save logs to a file. Your logs will be saved in directory react-logger-logs. Default: false
-    true, //Show only message in terminal. Default: false
-    1234 //Port on which the logger is running. Default: 1234
+    true, //Show only message in terminal. Ignores the value of stacktrace_hide. Default: false
+    1234, //Port on which the logger is running. Default: 1234
+    true //Hide stacktrace. Default: false
 );
 ```
 or 
@@ -46,8 +47,9 @@ or
 ReactLogger.config({
     visible : ["log", "error", "info", "warn", "logr"], //You can specify what information to show in the terminal
     save_logs: true, //Save logs to a file. Your logs will be saved in directory react-logger-logs. Default: false
-    only_msg : true, //Show only message in terminal. Default: false
-    port: 1234 //Port on which the logger is running. Default: 1234
+    only_msg : true, //Show only message in terminal. Ignores the value of stacktrace_hide. Default: false
+    port: 1234, //Port on which the logger is running. Default: 1234
+    stacktrace_hide: true //Hide stacktrace. Default: false
 });
 ReactLogger.start();
 ```

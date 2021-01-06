@@ -42,7 +42,7 @@ app.post('/console/:id', (req, res) => {
 	body =  req.body,
 	save_logs = (body.save_logs == "1") ? true : false,
 	date_obj = new Date(),
-	stack = (body.only_msg == "1") ? "" : ((body.stack) + " ").grey, 
+	stack = (body.only_msg == "1") ? "" : (((body.stacktrace_hide == "1") ? " " : (body.stack)) + " ").grey, 
 	log_name = " LOG: ";
 
 	let current_time = (date_obj.toLocaleTimeString()).grey;

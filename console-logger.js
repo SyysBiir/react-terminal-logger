@@ -1,4 +1,4 @@
-var only_msg = false, save_logs = false, visible = [], port = 1234;
+var only_msg = false, save_logs = false, visible = [], port = 1234, stacktrace_hide = false;
 async function fetch_ (in_, val, stack, save_logs) {
 	return new Promise(resolve => {
 		var data;
@@ -6,6 +6,7 @@ async function fetch_ (in_, val, stack, save_logs) {
 			if(typeof val[0] == 'object') {
 				data = {
 					only_msg: only_msg ? "1" : "0",
+					stacktrace_hide: stacktrace_hide ? "1" : "0",
 					string: "0",
 					save_logs: save_logs ? "1" : "0",
 					data: val[0],
@@ -14,6 +15,7 @@ async function fetch_ (in_, val, stack, save_logs) {
 			} else {
 				data = {
 					only_msg: only_msg ? "1" : "0",
+					stacktrace_hide: stacktrace_hide ? "1" : "0",
 					string: '1',
 					save_logs: save_logs ? "1" : "0",
 					data: val[0].toString(),
@@ -31,6 +33,7 @@ async function fetch_ (in_, val, stack, save_logs) {
 			})
 			data = {
 				only_msg: only_msg ? "1" : "0",
+				stacktrace_hide: stacktrace_hide ? "1" : "0",
 				string: '1',
 				save_logs: save_logs ? "1" : "0",
 				data: allVal,
@@ -65,8 +68,11 @@ module.exports = {
 		if(opt.port) {
 			port = opt.port;
 		}
+		if(opt.stacktrace_hide) {
+			stacktrace_hide = opt.stacktrace_hide;
+		}
 	},
-	start: (opt_ = ["log", "error", "info", "warn", "logr"], save_logs_ = false, only_msg_ = false, port_ = 1234) => {
+	start: (opt_ = ["log", "error", "info", "warn", "logr"], save_logs_ = false, only_msg_ = false, port_ = 1234, stacktrace_hide = false) => {
 		let opt = opt_;
 		if(save_logs_) {
 			save_logs = true;
@@ -76,6 +82,9 @@ module.exports = {
 		}
 		if(port_ != 1234) {
 			port = port_;
+		}
+		if(stacktrace_hide) {
+			stacktrace_hide = true;
 		}
 		if(visible.length > 0) {
 			opt = visible;
